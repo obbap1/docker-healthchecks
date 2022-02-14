@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
@@ -97,18 +96,4 @@ func InspectNetworkByName(name string) ([]networkHealthCheck, error) {
 		networkHealthChecks = append(networkHealthChecks, record)
 	}
 	return networkHealthChecks, nil
-}
-
-func main() {
-	networks, err := ListNetworks()
-	if err == nil {
-		for network := range networks {
-			c, err := InspectNetworkByName(network)
-			if err == nil {
-				fmt.Printf("\n %+s, %+v", network, c)
-			}
-
-		}
-	}
-
 }
